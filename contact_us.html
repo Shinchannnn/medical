@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Page</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="contact.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+
+    
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+
+   
+    <script>
+      window.onload = function () {
+        emailjs.init({
+          publicKey: "7FoAA-6BJd17odKwh", // email.js --> account --> public api key
+        });
+
+        document
+          .getElementById("contactForm")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone1 = document.getElementById("phone1").value;
+            const phone2 = document.getElementById("phone2").value;
+            const message = document.getElementById("message").value;
+
+            if (!name || !email || !phone1 || !message) {
+              alert("Please fill in all required fields!");
+              return;
+            }
+
+            emailjs
+            // .send("service_key" , "template_key")
+              .send("service_flt9dhu", "template_likjf2c", {
+                from_name: name,
+                phone1: phone1,
+                phone2: phone2,
+                reply_to: email,
+                message: message,
+              })
+              .then(
+                function (response) {
+                  console.log("SUCCESS!", response.status, response.text);
+                  alert("Email sent successfully!");
+                  document.getElementById("contactForm").reset();
+                },
+                function (error) {
+                  console.error("FAILED...", error);
+                  alert("Failed to send email. Please try again.");
+                }
+              );
+          });
+      };
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: white;
+      }
+    .logo{
+  width: 200px; /* Fixed width for logo container */
+}
+      .contact-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+      }
+      .contact-details,
+      .contact-form {
+        width: 100%;
+        max-width: 600px;
+      }
+      .social-media a {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img class="logo"
+              src="./Image/logo4.png"
+              alt="Health + Medihub Logo"
+              height="50"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="services.html">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact_us.html">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="customers.html">Happy Customers</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content (Contact Section) -->
+    <main>
+      <section id="contact" class="contact-section">
+        <div class="contact-details">
+          <h1>Contact Us</h1>
+          <p>
+            Feel free to reach out to us for any inquiries or support. We're
+            here to help!
+          </p>
+          <ul>
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:healthmedihub@gmail.com"
+                >healthmedihub@gmail.com</a
+              >
+            </li>
+            <li>
+              <strong>Phone:</strong>
+              <a href="tel:+917838583810"
+                >+91 7838583810 (MR. Sandeep Panwar)</a
+              >
+            </li>
+            <li><strong>Address:</strong>   GX9V+6QP , Ramnagaria , Sirsa ,  Kelnian , Haryana 125055</li>
+          </ul>
+         
+        </div>
+
+        <div class="contact-form">
+          <h2>Send Us a Message</h2>
+          <form id="contactForm">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="phone1">Your Phone Number</label>
+            <input type="tel" id="phone1" name="phone1" required />
+
+            <label for="phone2">Alternate Phone Number</label>
+            <input type="tel" id="phone2" name="phone2" required />
+
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit" id="submitBtn">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Health + Medihub. All Rights Reserved.</p>
+        <div class="social-media">
+          <a
+            href="https://www.linkedin.com/in/health-plus-medihub-84b37024b/"
+            target="_blank"
+            class="fab fa-linkedin"
+          ></a>
+          <a
+            href="https://www.youtube.com/@healthmedihub9000"
+            target="_blank"
+            class="fab fa-youtube"
+          ></a>
+          <a
+            href="https://www.facebook.com/p/Health-Medihub-100085226002783/"
+            target="_blank"
+            class="fab fa-facebook"
+          ></a>
+          <a
+            href="https://www.indiamart.com/health-medihub/"
+            target="_blank"
+            class="fas fa-shopping-cart"
+          ></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
